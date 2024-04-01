@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản lý báo giá</title>
+    <link rel="stylesheet" th:href="@{/md/css/mdb.min.css}">
+    <script th:src="@{/md/js/mdb.min.js}"></script>
+    <script th:src="@{/jquery-3.7.1.min.js}"></script>
+    <link rel="shortcut icon" type="image/png" th:href="@{/md/staff-images/logos/favicon.png}" />
+    <link rel="stylesheet" th:href="@{/md/staff-css/styles.min.css}" />
+    <link rel="stylesheet" th:href="@{/md/staff-css/side-bar.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/table-for-list.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/button.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/form.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/content.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/md/staff-css/filter-bar.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div>
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <a class="text-nowrap logo-img">
+                        <img th:src="@{/md/staff-images/logos/dark-logo.svg}" width="180" alt="" />
+                    </a>
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-8"></i>
+                    </div>
+                </div>
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Quản lý người dùng</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="./ui-quanlynguoidung.html" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý người dùng</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Quản lý dự án</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/request-management}" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý yêu cầu</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/project-management}" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý dự án</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Quản lý sản phẩm</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="./ui-quanlysanpham.html" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý sản phẩm</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="./ui-quanlyphanloai.html" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý phân loại</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="./ui-quanlychatlieusanpham.html" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý chất liệu</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Quản lý thiết kế mẫu, blog</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="./ui-quanlythietkenoithatmau.html" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý thiết kế mẫu</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/blog-management}" aria-expanded="false">
+                                <span class="hide-menu no-icon">Quản lý blog</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!--  Sidebar End -->
+        <!--  Main wrapper -->
+        <div class="body-wrapper">
+            <!--  Header Start -->
+            <header class="app-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
+                                href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                                <i class="ti ti-bell-ringing"></i>
+                                <div class="notification bg-primary rounded-circle"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div>Trần Nguyên Nhật Minh</div>
+                                    <img th:src="@{/md/staff-images/profile/user-1.jpg}" alt="" width="35" height="35"
+                                        class="rounded-circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M207 381.5L12.7 187.1c-9.4-9.4-9.4-24.6 0-33.9l22.7-22.7c9.4-9.4 24.5-9.4 33.9 0L224 284.5l154.7-154c9.4-9.3 24.5-9.3 33.9 0l22.7 22.7c9.4 9.4 9.4 24.6 0 33.9L241 381.5c-9.4 9.4-24.6 9.4-33.9 0z" />
+                                    </svg>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <a href="ui-profile.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-user fs-6"></i>
+                                            <p class="mb-0 fs-3">Profile</p>
+                                        </a>
+                                        <a href="ui-taikhoan.html"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-mail fs-6"></i>
+                                            <p class="mb-0 fs-3">Tài khoản</p>
+                                        </a>
+                                        <a href="./ui-dangnhap.html"
+                                            class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!--  Header End -->
+            <div class="container-fluid">
+            </div>
+
+
+
+<!--            TABLE BÁO GIÁ Ở ĐÂY!!!-->
+            <div class="container-fluid">
+                <div class="container-fluid" style="margin-top: -100px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">CHI TIẾT YÊU CẦU BÁO GIÁ</h5>
+                            <div class="card no-shadow mainProjectInformation">
+                                <div class="show-content">
+                                    <div class="content-inline">
+                                        <div id="mainProjectId">ID Dự án: </div>
+                                        <div id="projectName">Tên dự án: </div>
+                                    </div>
+                                    <div class="content-inline">
+                                        <div class="projectCategory">Loại dự án:
+                                            <select id=projectCategoryId>
+                                            </select>
+                                        </div>
+                                        <div id="staffName">Nhân viên phụ trách: </div>
+                                    </div>
+                                    <div class="content-inline">
+                                        <div id="customerName">Khách hàng: </div>
+                                        <div id="customerPhone">Số điện thoại: </div>
+                                    </div>
+                                    <div class="content-inline">
+                                        <div id="quotationId">Mã báo giá: </div>
+                                        <div id="quotationName">Tên báo giá: </div>
+                                    </div>
+                                    <div class="content-non-inline" id="contentRequestQuotation">Yêu cầu của khách hàng: </div>
+                                </div>
+
+                                <label>Chọn nhà cung cấp:</label>
+                                <select id="supplierId" style="width: 24%" class="form-select" aria-label="Default select example">
+                                </select>
+
+
+                                <label name="lblRoom" style="margin-top: 25px">Chọn loại phòng:</label>
+                                <select class="selectRoomCategory form-select" id="roomCategoryId1" style="width: 15%" aria-label="Default select example">
+                                </select>
+                                <table class="content-table show-product" id="manage-product-table1" style="margin-bottom: 0px; margin-top: 5px">
+                                    <thead>
+                                    <tr>
+                                        <th class="display-column" rowspan="2">Sản phẩm</th>
+                                        <th class="display-column" rowspan="2">Mô tả</th>
+                                        <th class="display-column" colspan="3">Kích thước</th>
+                                        <th class="display-column" rowspan="2">Đơn vị</th>
+                                        <th class="display-column" rowspan="2">Số lượng</th>
+                                        <th class="display-column" rowspan="2">Đơn giá</th>
+                                        <th rowspan="2">Hình tham khảo</th>
+                                        <th class="display-column" rowspan="2">Thành tiền</th>
+                                        <th rowspan="2"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Dài</th>
+                                        <th>Rộng</th>
+                                        <th>Cao</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="display-input-none-border">
+                                            <td style="width: 150px">
+                                                <select class="selectProduct" id="product1" style="width: 200px">
+                                                </select>
+                                            </td>
+                                            <td style="width: 150px" data-name="txtProductDescription"></td>
+                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductLength"></td>
+                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductWidth"></td>
+                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductHeight"></td>
+                                            <td style="width: 68px; text-align: center" data-name="txtProductMeasureUnit"></td>
+                                            <td style="width: 75px; text-align: center"><input style="width: 60px; text-align: center" type="number" min="0" max="10000" name="inputProductQuantity"></td>
+                                            <td style="width: 65px; text-align: center" data-name="txtProductUnitPrice"></td>
+                                            <td></td>
+                                            <td style="text-align: center" data-name="txtProductTotalPrice"></td>
+                                            <td><button name="btnDeleteRecord" class="delete-icon"><i style="font-size:12px" class="fa">&#xf00d;</i></button></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="9">Tổng sơ bộ</td>
+                                        <td class="sumOfTotalPrice text-aligh-center" colspan="1"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                <button name="addNewRecord" class="btn btn-primary m-1">+</button>
+                                <button name="deleteTable" class="btn btn-primary m-1">Xóa phòng</button>
+                                <button id="addNewTable" class="btn btn-primary m-1">Thêm phòng mới</button>
+                                <div class="display-flex justify-content-right display-button">
+                                    <div id="totalPriceOfAllRoom" style="padding-top: 10px; margin-right: 30px">Tổng giá sơ bộ: </div>
+                                    <button onclick="getMainProject()" class="btn btn-primary m-1" href="#" data-mdb-toggle="modal" data-mdb-target="#exampleModal" >Tạo đơn</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="modal fade model-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width: 150%">
+                        <div class="modal-header">
+                            <button type="button" onclick="redirectToProjectInformation()" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" id="closeMainModal"></button>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="container-fluid">
+                                <div class="display-form">
+                                    <div class="card-body">
+                                        <div class="display-center" style="text-align: center;">
+                                            <h8 class="card-title fw-semibold mb-4" style="padding-left: 140px;">Báo giá đã được tạo thành công!</h8>
+                                            <div style="padding-top: 15px;"
+                                                 class="display-flex display-button justify-content-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script th:href="@{/md/staff-libs/jquery/dist/jquery.min.js}"></script>
+    <script th:href="@{/md/staff-libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:href="@{/md/staff-js/sidebarmenu.js}"></script>
+    <script th:href="@{/md/staff-js/app.min.js}"></script>
+    <script th:href="@{/md/staff-libs/simplebar/dist/simplebar.js}"></script>
+    <script th:href="@{/md/staff-js/pagination.js}"></script>
+    <script th:href="@{/md/staff-js/filter.js}"></script>
+
+
+
+
+    <script>
+
+        let tableCount = 1;
+
+        $(document).ready(function () {
+            getSupplier();
+            getCategoryRoom(1, function() {
+                $('.selectRoomCategory').each(function() {
+                    var selectRoomCategory = $(this); // Lưu trữ phần tử $('.selectRoomCategory') trong một biến
+                    fetchDataAndUpdateSelect(selectRoomCategory, function() {
+                        selectRoomCategory.next('table').find('.selectProduct').trigger('change');
+                    });
+                });
+            });
+        });
+
+        function getSupplier() {
+            $.ajax({
+                url: 'http://localhost:8080/api/supplier',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillSupplier(resp.data)
+                }
+            })
+        }
+        function fillSupplier(suppliers) {
+            for (let i = 0; i < suppliers.length; i++) {
+                $('#supplierId').append('<option value="' + suppliers[i].supId +'">' + suppliers[i].supName +'</option>')
+            }
+        }
+        function getCategoryRoom(numberSelect, callback) {
+            $.ajax({
+                url: 'http://localhost:8080/api/categoryRoom',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillCategoryRoom(resp.data, numberSelect)
+                    if (callback && typeof callback === 'function') {
+                        callback(); // Gọi hàm callback nếu được truyền vào và là một hàm
+                    }
+                }
+            })
+        }
+        function fillCategoryRoom(list, numberSelect) {
+            let roomCategoryId = $('#roomCategoryId' + numberSelect)
+            for (let i = 0; i < list.length; i++) {
+                roomCategoryId.append('<option value="' + list[i].roomCategoryId +'">' + list[i].categoryName +'</option>')
+            }
+        }
+
+        $(document).on('change', '.selectRoomCategory', function() {
+            let selectRoomCategory = $(this);
+            fetchDataAndUpdateSelect(selectRoomCategory, function() {
+                selectRoomCategory.next('table').find('.selectProduct').trigger('change'); // Kích hoạt sự kiện change trên selectProduct
+            });
+        });
+        //Cập nhật giá trị của thẻ select product khi chọn lại loại phòng
+        function fetchDataAndUpdateSelect(selectRoomCategory, callback) {
+            let selectedRoomCategoryId = selectRoomCategory.val(); // Lấy giá trị roomCategoryId từ selectRoomCategory
+            let table = selectRoomCategory.next('table');
+            let selectProduct = table.find('.selectProduct');
+
+            // Gọi API để lấy danh sách sản phẩm dựa trên roomCategoryId
+            $.ajax({
+                url: 'http://localhost:8080/api/product/roomCategory?roomCategoryId=' + selectedRoomCategoryId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    // Xóa các option cũ trong selectProduct
+                    selectProduct.empty();
+
+                    // Đổ dữ liệu vào selectProduct
+                    for (let i = 0; i < resp.data.length; i++) {
+                        selectProduct.append('<option value="' + resp.data[i].pro_id +'">' + resp.data[i].pro_name +'</option>');
+                    }
+                    // Gọi callback function nếu được cung cấp
+                    if (callback && typeof callback === 'function') {
+                        callback();
+                    }
+                }
+            });
+        }
+
+        // Sử dụng sự kiện click cho nút
+        $('#addNewTable').click(function() {
+            ++tableCount;
+            // Tạo HTML cho bảng mới
+            var newTableHTML = '<label name="lblRoom" style="margin-top: 50px">Chọn loại phòng:</label>\n' +
+                '                                <select class="selectRoomCategory form-select" id="roomCategoryId'+ tableCount +'" style="width: 15%" aria-label="Default select example">\n' +
+                '                                </select>\n' +
+                '                                <table class="content-table show-product" id="manage-product-table'+ tableCount +'" style="margin-bottom: 0px; margin-top: 5px">\n' +
+                '                                    <thead>\n' +
+                '                                    <tr>\n' +
+                '                                        <th class="display-column" rowspan="2">Sản phẩm</th>\n' +
+                '                                        <th class="display-column" rowspan="2">Mô tả</th>\n' +
+                '                                        <th class="display-column" colspan="3">Kích thước</th>\n' +
+                '                                        <th class="display-column" rowspan="2">Đơn vị</th>\n' +
+                '                                        <th class="display-column" rowspan="2">Số lượng</th>\n' +
+                '                                        <th class="display-column" rowspan="2">Đơn giá</th>\n' +
+                '                                        <th rowspan="2">Hình tham khảo</th>\n' +
+                '                                        <th class="display-column" rowspan="2">Thành tiền</th>\n' +
+                '                                        <th rowspan="2"></th>\n' +
+                '                                    </tr>\n' +
+                '                                    <tr>\n' +
+                '                                        <th>Dài</th>\n' +
+                '                                        <th>Rộng</th>\n' +
+                '                                        <th>Cao</th>\n' +
+                '                                    </tr>\n' +
+                '                                    </thead>\n' +
+                '                                    <tbody>\n' +
+                '                                        <tr class="display-input-none-border">\n' +
+                '                                            <td style="width: 150px">\n' +
+                '                                                <select class="selectProduct" id="product'+ (selectProductCount) +'" style="width: 200px">\n' +
+                '                                                </select>\n' +
+                '                                            </td>' +
+                '                                            <td style="width: 150px" data-name="txtProductDescription"></td>' +
+                '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductLength"></td>' +
+                '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductWidth"></td>' +
+                '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductHeight"></td>' +
+                '                                            <td style="width: 68px; text-align: center" data-name="txtProductMeasureUnit"></td>' +
+                '                                            <td style="width: 75px; text-align: center"><input style="width: 60px; text-align: center" type="number" min="0" max="10000" name="inputProductQuantity"></td>' +
+                '                                            <td style="width: 65px; text-align: center" data-name="txtProductUnitPrice"></td>' +
+                '                                            <td></td>' +
+                '                                            <td style="text-align: center" data-name="txtProductTotalPrice"></td>' +
+                '                                            <td><button name="btnDeleteRecord" class="delete-icon"><i style="font-size:12px" class="fa">&#xf00d;</i></button></td>' +
+                '                                        </tr>\n' +
+                '                                    </tbody>\n' +
+                '                                    <tfoot>\n' +
+                '                                    <tr>\n' +
+                '                                        <td colspan="9">Tổng sơ bộ</td>\n' +
+                '                                        <td class="sumOfTotalPrice text-aligh-center" colspan="1"></td>\n' +
+                '                                    </tr>\n' +
+                '                                    </tfoot>\n' +
+                '                                </table>\n' +
+                '                                <button name="addNewRecord" class="btn btn-primary m-1">+</button>' +
+                '<button name="deleteTable" class="btn btn-primary m-1">Xóa phòng</button>';
+
+            // Chèn bảng mới vào trước nút
+            $(this).before(newTableHTML);
+
+            getCategoryRoom(tableCount, function() {
+                fetchDataAndUpdateSelect($('#roomCategoryId' + tableCount), function() {
+                    $('#manage-product-table' + tableCount).find('.selectProduct').trigger('change');
+                });
+            });
+        });
+        // xóa table
+        $(document).on('click', '[name="deleteTable"]', function() {
+            $(this).prev().prev().prev().prev().remove()
+            $(this).prev().prev().prev().remove()
+            $(this).prev().prev().remove()
+            $(this).prev().remove()
+            $(this).remove();
+            getTotalPriceOfAllRoom();
+        });
+
+        let selectProductCount = 1;
+        $(document).on('click', '[name="addNewRecord"]', function() {
+            var tbody = $(this).prev().find('tbody');
+            selectProductCount++;
+            // HTML mới cho hàng
+            var newRowHTML = '<tr class="display-input-none-border">\n' +
+                '   <td style="width: 150px">\n' +
+                '        <select class="selectProduct" id="product'+ selectProductCount +'" style="width: 200px">\n' +
+                '        </select>\n' +
+                '   <td style="width: 150px" data-name="txtProductDescription"></td>\n' +
+                '   <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductLength"></td>\n' +
+                '   <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductWidth"></td>\n' +
+                '   <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductHeight"></td>\n' +
+                '   <td style="width: 68px; text-align: center" data-name="txtProductMeasureUnit"></td>\n' +
+                '   <td style="width: 75px; text-align: center"><input style="width: 60px; text-align: center" type="number" min="0" max="10000" name="inputProductQuantity"></td>\n' +
+                '   <td style="width: 65px; text-align: center" data-name="txtProductUnitPrice"></td>\n' +
+                '   <td></td>\n' +
+                '   <td style="text-align: center" data-name="txtProductTotalPrice"></td>\n' +
+                '   <td><button name="btnDeleteRecord" class="delete-icon"><i style="font-size:12px" class="fa">&#xf00d;</i></button></td>';
+
+            // Thêm hàng mới vào tbody
+            tbody.append(newRowHTML);
+
+            // Cập nhật tùy chọn cho selectProduct mới thêm vào
+            let newSelectProduct = $('#product' + (selectProductCount));
+            fillSelectProductAfterAddNewRecord(newSelectProduct, function() {
+                newSelectProduct.trigger('change');
+            });
+            // Gắn sự kiện keyup cho inputProductQuantity mới thêm vào
+            // tbody.find('[name="inputProductQuantity"]').on('keyup', function() {
+            //     let commonParentRow = $(this).closest('tr');
+            //     let selectProduct = commonParentRow.find('.selectProduct');
+            //     selectProduct.trigger('change');
+            // });
+        });
+
+        function fillSelectProductAfterAddNewRecord(newSelectProduct, callback) {
+            // Tìm phần tử table cha chứa newSelectProduct
+            let table = $(newSelectProduct).closest('table');
+            let selectedRoomCategoryId = table.prev().val();
+            $.ajax({
+                url: 'http://localhost:8080/api/product/roomCategory?roomCategoryId=' + selectedRoomCategoryId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    // Đổ dữ liệu vào selectProduct
+                    for (let i = 0; i < resp.data.length; i++) {
+                        if(i===0) {newSelectProduct.append('<option value="' + resp.data[i].pro_id +'">' + resp.data[i].pro_name +'</option>');}
+                        else newSelectProduct.append('<option value="' + resp.data[i].pro_id +'">' + resp.data[i].pro_name +'</option>');
+                    }
+                    // Gọi callback function nếu được cung cấp
+                    if (callback && typeof callback === 'function') {
+                        callback();
+                    }
+                }
+            });
+        }
+
+        $(document).on('click', '[name="btnDeleteRecord"]', function() {
+            // Tìm bảng chứa nút button hiện tại
+            var table = $(this).closest('table');
+
+            // Đếm số lượng button có name là "btnDeleteRecord" trong bảng
+            var deleteButtonsCount = table.find('button[name="btnDeleteRecord"]').length;
+            if(deleteButtonsCount===1) return;
+            parentRow = $(this).closest('tr')
+            let parentBody = parentRow.closest('tbody')
+            // Xóa phần tử cha của nút được click (trong trường hợp này là <tr>)
+            $(this).closest('tr').remove();
+            parentBody.next().find('.sumOfTotalPrice').text((((getSumOfTotalPrice(parentBody) * 1000)).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+            getTotalPriceOfAllRoom();
+        });
+
+        $(document).on('change', '.selectProduct', function() {
+            var supId = $('#supplierId').val()
+            var proId = $(this).val()
+            let currentSelectProduct = $(this)
+            resetQuantitySelectProduct(currentSelectProduct)
+            $.ajax({
+                url: 'http://localhost:8080/api/product/inputSupplierProduct?proId=' + proId + '&supId=' + supId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillRecord(currentSelectProduct, resp.data)
+                }
+            });
+        })
+        function fillRecord(currentSelectProduct, supplierProductDetails) {
+            let currentRow = currentSelectProduct.closest('tr')
+
+            let des = currentRow.find('[data-name="txtProductDescription"]')
+            des.text(supplierProductDetails.pro_description);
+            let length = currentRow.find('[data-name="txtProductLength"]')
+            let width = currentRow.find('[data-name="txtProductWidth"]')
+            let height = currentRow.find('[data-name="txtProductHeight"]')
+            let measureUnit = currentRow.find('[data-name="txtProductMeasureUnit"]')
+            let unitPrice = currentRow.find('[data-name="txtProductUnitPrice"]')
+            let quantity = currentRow.find('[name="inputProductQuantity"]').val()
+            let totalPrice = currentRow.find('[data-name="txtProductTotalPrice"]')
+            if(supplierProductDetails.measure_unit_name=="Cái") {
+                length.text(supplierProductDetails.pro_length);
+                width.text(supplierProductDetails.pro_width);
+                height.text(supplierProductDetails.pro_height);
+                measureUnit.text('Cái')
+                unitPrice.text((supplierProductDetails.unit_price*1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+                totalPrice.text((supplierProductDetails.unit_price*1000000*quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+            } else if(supplierProductDetails.measure_unit_name=="Mét dài") {
+                length.html('<input name="inputLength" type="number" min="0" max="10000" style="width: 60px; text-align: center" value=""/>')
+                height.text(supplierProductDetails.pro_height);
+                measureUnit.text('Mét dài');
+                unitPrice.text((supplierProductDetails.unit_price*1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+                totalPrice.text(0 + '₫')
+                if(supplierProductDetails.is_cus_width==false) {
+                    width.text(supplierProductDetails.pro_width);
+                } else width.html('<input name="inputWidth" type="number" min="0" max="10000" style="width: 60px; text-align: center" value=""/>')
+            } else {
+                length.html('<input name="inputLength" type="number" min="0" max="10000" style="width: 60px; text-align: center" value=""/>')
+                measureUnit.text('Mét vuông');
+                unitPrice.text((supplierProductDetails.unit_price*1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+                totalPrice.text(0 + '₫')
+                if(supplierProductDetails.is_cus_width==true) {
+                    width.html('<input name="inputWidth" type="number" min="0" max="10000" style="width: 60px; text-align: center" value=""/>')
+                    height.text(supplierProductDetails.pro_height);
+                } else {
+                    height.html('<input name="inputHeight" min="0" max="10000" type="number" style="width: 60px; text-align: center" value=""/>')
+                    width.text(supplierProductDetails.pro_width);
+                }
+            }
+            let parentBody = parentRow.closest('tbody')
+            parentBody.next().find('.sumOfTotalPrice').text((((getSumOfTotalPrice(parentBody) * 1000)).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+            getTotalPriceOfAllRoom();
+        }
+
+        function findSupplierProductDetailsByProductId(proId) {
+            var supId = $('#supplierId').val();
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    url: 'http://localhost:8080/api/product/inputSupplierProduct?proId=' + proId + '&supId=' + supId,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    success: function(resp) {
+                        resolve(resp.data);
+                    },
+                    error: function(err) {
+                        reject(err);
+                    }
+                });
+            });
+        }
+
+        $(document).on('change keyup', '[name="inputLength"], [name="inputWidth"], [name="inputHeight"], [name="inputProductQuantity"]', async function () {
+            let parentRow = $(this).closest('tr');
+            try {
+                let supplierProductDetails = await findSupplierProductDetailsByProductId(parentRow.find('.selectProduct').val());
+                let unitPrice = supplierProductDetails.unit_price;
+                let totalPrice = parentRow.find('[data-name="txtProductTotalPrice"]');
+                let curLength = parentRow.find('[name="inputLength"]').val()
+                let curWidth = parentRow.find('[name="inputWidth"]').val()
+                let curHeight = parentRow.find('[name="inputHeight"]').val()
+                let curQuantity = parentRow.find('[name="inputProductQuantity"]').val()
+                let name = $(this).attr('name');
+                let measureUnit = supplierProductDetails.measure_unit_name;
+                let isCusLength = supplierProductDetails.is_cus_length;
+                let isCusWidth = supplierProductDetails.is_cus_width;
+                let isCusHeight = supplierProductDetails.is_cus_height;
+                switch (name) {
+                    case 'inputLength':
+                        if(measureUnit==="Mét dài") {
+                            totalPrice.text((($(this).val() * unitPrice * curQuantity * 10000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        if(measureUnit==="Mét vuông") {
+                            if(isCusWidth==false) {
+                                totalPrice.text(((($(this).val() * curHeight)/10000 * curQuantity * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                            } else totalPrice.text(((($(this).val() * curWidth)/10000 * curQuantity * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        break;
+                    case 'inputWidth':
+                        if(measureUnit==="Mét dài") {
+                            totalPrice.text(((curLength * unitPrice * curQuantity * 10000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        else if(measureUnit==="Mét vuông") {
+                            totalPrice.text(((($(this).val() * curLength)/10000 * curQuantity * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        break;
+                    case 'inputHeight':
+                        totalPrice.text(((($(this).val() * curLength)/10000 * curQuantity * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        break;
+                    case 'inputProductQuantity':
+                        if(measureUnit==="Cái") {
+                            totalPrice.text((($(this).val() * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        else if(measureUnit==="Mét dài") {
+                            totalPrice.text(((curLength * unitPrice * $(this).val() * 10000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        else {
+                            if(isCusWidth===true) totalPrice.text((((curWidth * curLength)/10000 * $(this).val() * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                            else totalPrice.text((((curHeight * curLength)/10000 * $(this).val() * unitPrice * 1000000).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                        }
+                        break;
+                }
+                let parentBody = parentRow.closest('tbody')
+                parentBody.next().find('.sumOfTotalPrice').text((((getSumOfTotalPrice(parentBody) * 1000)).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                getTotalPriceOfAllRoom();
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        $(document).on('input', 'input[type="number"][min="0"]', function() {
+            if (parseInt($(this).val()) < 0) {
+                $(this).val(Math.abs($(this).val())) // Nếu giá trị nhập vào là âm, đặt lại giá trị là dương
+            }
+        });
+
+        $(document).on('input', 'input[type="number"][max="10000"]', function() {
+            if (parseInt($(this).val()) > 10000) {
+                $(this).val(10000)
+            }
+        });
+
+        function resetQuantitySelectProduct(currentSelectProduct) {
+            parentRow = currentSelectProduct.closest('tr')
+            parentRow.find('[name="inputProductQuantity"]').val(1)
+        }
+
+        function getSumOfTotalPrice(parentbody) {
+            let totalPriceSum = 0;
+            // Lặp qua tất cả các thẻ td có data-name="txtProductUnitPrice"
+            parentbody.find('td[data-name="txtProductTotalPrice"]').each(function() {
+                var priceString = $(this).text();
+                var priceNumber = $(this).text().replace(/[^\d]/g, '');
+                var price = parseFloat(priceNumber);
+                price /= 1000
+                totalPriceSum += price;
+            });
+            return totalPriceSum;
+        }
+
+        function getTotalPriceOfAllRoom() {
+            let totalPriceOfAllRoom = 0;
+            $('.sumOfTotalPrice').each(function () {
+                var priceString = $(this).text().replace(/[^\d]/g, '');
+                var price = parseFloat(priceString);
+                price /= 1000
+                totalPriceOfAllRoom += price;
+            })
+            $('#totalPriceOfAllRoom').text('Tổng giá sơ bộ: ' + (((totalPriceOfAllRoom * 1000)).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+        }
+
+        function getMainProject() {
+
+            let mainProjectDTO =  {
+                mainProjectId: mainProjectId,
+                customerId: customerId,
+                staffId: staffId,
+                status: 3,
+                quotations: [
+                    {
+                        quotationId: quotationId,
+                        requestTime: requestTime,
+                        status: 3,
+                        contentRequestQuotation: contentRequestQuotation,
+                        project: {
+                            projId: 0,
+                            projName: projectName,
+                            projectCategoryId: $('#projectCategoryId').val(),
+                            quotationId: quotationId,
+                            supplierId: $('#supplierId').val(),
+                            rooms: []
+                        }
+                    }
+                ]
+            }
+
+            $('.selectRoomCategory').each(function (index) {
+                let table = $(this).next();
+                let roomCatId = $(this).val();
+                let roomName = getRoomName(roomCatId);
+                let room = {
+                    roomId: 0,
+                    roomName: 'Quotation ID: ' + quotationId + ' - ' + roomName,
+                    roomCategoryId: roomCatId,
+                    productDetailList: []
+                }
+                table.find('.display-input-none-border').each(function (index) {
+                    let productDetail = {
+                        proId: $(this).find('.selectProduct').val(),
+                        proLength: parseFloat($(this).find('[data-name="txtProductLength"]').text()),
+                        proWidth: parseFloat($(this).find('[data-name="txtProductWidth"]').text()),
+                        proHeight: parseFloat($(this).find('[data-name="txtProductHeight"]').text()),
+                        quantity: $(this).find('[name="inputProductQuantity"]').val(),
+                        totalPrice: convertCurrencyToNumber($(this).find('[data-name="txtProductTotalPrice"]').text()) // Xóa ký tự ₫ và dấu phẩy trước khi chuyển đổi sang số
+                    }
+                    if($(this).find('[data-name="txtProductLength"]').find('input').length > 0) {
+                        productDetail.proLength = parseFloat($(this).find('[data-name="txtProductLength"]').find('input').val());
+                    }
+                    if($(this).find('[data-name="txtProductWidth"]').find('input').length > 0) {
+                        productDetail.proWidth = parseFloat($(this).find('[data-name="txtProductWidth"]').find('input').val());
+                    }
+                    if($(this).find('[data-name="txtProductHeight"]').find('input').length > 0) {
+                        productDetail.proHeight = parseFloat($(this).find('[data-name="txtProductHeight"]').find('input').val());
+                    }
+                    room.productDetailList.push(productDetail)
+                })
+                mainProjectDTO.quotations[0].project.rooms.push(room);
+            })
+            SaveMainProject(mainProjectDTO)
+        }
+
+        function SaveMainProject(mainProjectDTO) {
+            $.ajax({
+                url: 'http://localhost:8080/api/quotation/save',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(mainProjectDTO),
+                success:function (resp) {
+                    console.log(resp)
+                }, error:function (err) {
+                    console.log(err)
+                }
+            })
+        }
+
+        function getRoomName(index) {
+            switch (index) {
+                case "1":
+                    return "Phòng khách";
+                case "2":
+                    return "Phòng trang trí";
+                case "3":
+                    return "Phòng thờ";
+                case "4":
+                    return "Phòng bếp";
+                case "5":
+                    return "Phòng ngủ";
+                default:
+                    return "";
+            }
+        }
+
+        function convertCurrencyToNumber(currencyString) {
+            // Xóa bỏ ký tự "₫" và dấu phẩy từ chuỗi tiền tệ
+            let numberString = currencyString.replace(/[₫,.]/g, '');
+            // Chuyển đổi chuỗi thành số và trả về
+            return parseFloat(numberString)/1000000;
+        }
+
+    </script>
+
+
+    <script>
+        let quotationId;
+        $(document).ready(function () {
+            // Lấy tham số từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            quotationId = urlParams.get('quotationId');
+            getQuotationInformation();
+            getCategoryProject();
+        });
+
+        function getCategoryProject() {
+            $.ajax({
+                url: 'http://localhost:8080/api/project/categoryProject',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillCategoryProject(resp.data)
+                }
+            });
+        }
+        function fillCategoryProject(list) {
+            let str = "";
+            for (let i = 0; i < list.length; i++) {
+                str += '<option value="' + list[i].projCategoryId + '">' + list[i].categoryName +'</option>'
+            }
+            $('#projectCategoryId').html(str)
+        }
+
+        function getQuotationInformation() {
+            $.ajax({
+                url: 'http://localhost:8080/api/quotation/findById?quotationId=' + quotationId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: async function (resp) {
+                    fillMainProjectInformation(resp.data);
+                    if(await isFirstQuotation(mainProjectId) === false) {
+                        getLastQuotation();
+                    }
+                }
+            });
+        }
+        let mainProjectId;
+        let customerId;
+        let staffId;
+        let requestTime;
+        let contentRequestQuotation;
+        let projectName;
+        function fillMainProjectInformation(quotation) {
+            $('#mainProjectId').text($('#mainProjectId').text() + 'P' + quotation.main_project_id);
+            $('#customerName').text($('#customerName').text() + quotation.first_name + ' ' + quotation.last_name);
+            $('#staffName').text($('#staffName').text() + 'Cristiano Messi');
+            $('#contentRequestQuotation').text($('#contentRequestQuotation').text() + quotation.content_request_quotation);
+            $('#customerPhone').text($('#customerPhone').text() + quotation.phone_number)
+            $('#projectName').text($('#projectName').text() + ' ' + 'Main Project ID ' + quotation.main_project_id + ' ' + quotation.first_name + ' ' + quotation.last_name);
+            $('#quotationId').text('Mã báo giá: Q' + quotation.quotation_id);
+            $('#quotationName').text('Tên báo giá: ' + 'Quotation ID ' + quotation.quotation_id + ' ' + quotation.first_name + ' ' + quotation.last_name);
+            mainProjectId = quotation.main_project_id;
+            customerId = quotation.customer_id;
+            staffId = quotation.staff_id;
+            requestTime = quotation.request_time;
+            contentRequestQuotation = quotation.content_request_quotation;
+            projectName = 'Quotation ID ' + quotation.quotation_id + ' ' + quotation.first_name + ' ' + quotation.last_name;
+        }
+
+        function redirectToProjectInformation() {
+            window.location.href = '/project-information?mainProjectId=' + mainProjectId;
+        }
+        $('#exampleModal').on('hidden.bs.modal', function () {
+            redirectToProjectInformation();
+        });
+
+
+        // FILL THÔNG TIN TỪ LAST QUOTATION
+        async function isFirstQuotation(mainProjectId) {
+            try {
+                const resp = await $.ajax({
+                    url: 'http://localhost:8080/api/main-project?mainProjectId=' + mainProjectId,
+                    method: 'GET',
+                    contentType: 'application/json'
+                });
+
+                return resp.data.quotations.length === 1;
+            } catch (error) {
+                console.error(error);
+                return false; // Xử lý lỗi và trả về false nếu có lỗi xảy ra
+            }
+        }
+
+        function getLastQuotation() {
+            $.ajax({
+                url: 'http://localhost:8080/api/main-project/last-quotation?mainProjectId=' + mainProjectId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillQuotationByLastQuotation(resp.data)
+                }
+            });
+        }
+
+        function fillQuotationByLastQuotation(lastQuotation) {
+            deleteInitialElement()
+            $('#supplierId').val(lastQuotation.project.rooms[0].roomProducts[0].productDetail.supplierProduct.supplier.supId);
+            var str = ''
+            for (let i = 0; i < lastQuotation.project.rooms.length; i++) {
+                ++tableCount;
+                // Tạo HTML cho bảng mới
+                str = '<label name="lblRoom" style="margin-top: 50px">Chọn loại phòng:</label>\n' +
+                    '                                <select class="selectRoomCategory form-select" id="roomCategoryId'+ tableCount +'" style="width: 15%" aria-label="Default select example">\n' +
+                    '                                </select>\n' +
+                    '                                <table class="content-table show-product" id="manage-product-table'+ tableCount +'" style="margin-bottom: 0px; margin-top: 5px">\n' +
+                    '                                    <thead>\n' +
+                    '                                    <tr>\n' +
+                    '                                        <th class="display-column" rowspan="2">Sản phẩm</th>\n' +
+                    '                                        <th class="display-column" rowspan="2">Mô tả</th>\n' +
+                    '                                        <th class="display-column" colspan="3">Kích thước</th>\n' +
+                    '                                        <th class="display-column" rowspan="2">Đơn vị</th>\n' +
+                    '                                        <th class="display-column" rowspan="2">Số lượng</th>\n' +
+                    '                                        <th class="display-column" rowspan="2">Đơn giá</th>\n' +
+                    '                                        <th rowspan="2">Hình tham khảo</th>\n' +
+                    '                                        <th class="display-column" rowspan="2">Thành tiền</th>\n' +
+                    '                                        <th rowspan="2"></th>\n' +
+                    '                                    </tr>\n' +
+                    '                                    <tr>\n' +
+                    '                                        <th>Dài</th>\n' +
+                    '                                        <th>Rộng</th>\n' +
+                    '                                        <th>Cao</th>\n' +
+                    '                                    </tr>\n' +
+                    '                                    </thead>\n' +
+                    '                                    <tbody>\n' +
+                    '                                   </tbody>\n' +
+                    '                                   <tfoot>\n' +
+                                                    '           <tr>\n' +
+                                                    '               <td colspan="9">Tổng sơ bộ</td>\n' +
+                                                    '               <td class="sumOfTotalPrice text-aligh-center" colspan="1"></td>\n' +
+                                                    '           </tr>\n' +
+                                                    '   </tfoot>\n' +
+                                                    '</table>'
+                $('#addNewTable').before(str);
+                for (let j = 0; j < lastQuotation.project.rooms[i].roomProducts.length; j++) {
+                    str =
+                    '                                        <tr class="display-input-none-border">\n' +
+                    '                                            <td style="width: 150px">\n' +
+                    '                                                <select class="selectProduct" id="product'+ selectProductCount +'" style="width: 200px">\n' +
+                    '                                                </select>\n' +
+                    '                                            </td>' +
+                    '                                            <td style="width: 150px" data-name="txtProductDescription"></td>' +
+                    '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductLength"></td>' +
+                    '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductWidth"></td>' +
+                    '                                            <td style="width: 75px; text-align: center" colspan="1" data-name="txtProductHeight"></td>' +
+                    '                                            <td style="width: 68px; text-align: center" data-name="txtProductMeasureUnit"></td>' +
+                    '                                            <td style="width: 75px; text-align: center"><input style="width: 60px; text-align: center" type="number" min="0" max="10000" name="inputProductQuantity"></td>' +
+                    '                                            <td style="width: 65px; text-align: center" data-name="txtProductUnitPrice"></td>' +
+                    '                                            <td></td>' +
+                    '                                            <td style="text-align: center" data-name="txtProductTotalPrice"></td>' +
+                    '                                            <td><button name="btnDeleteRecord" class="delete-icon"><i style="font-size:12px" class="fa">&#xf00d;</i></button></td>' +
+                    '                                        </tr>\n'
+                    $('#addNewTable').prev().find('tbody').append(str);
+                    fetchProductByLastQuotation(lastQuotation.project.rooms[i].categoryRoom.roomCategoryId, selectProductCount, lastQuotation.project.rooms[i].roomProducts[j].productDetail.supplierProduct.product.proId)
+                    fetchProductDetailByLastQuotation($('#product' + selectProductCount).closest('tr'), lastQuotation.project.rooms[i].roomProducts[j]);
+                    $('#addNewTable').prev().find('.sumOfTotalPrice').text((((getSumOfTotalPrice($('#addNewTable').prev().find('tbody')) * 1000)).toFixed(0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫');
+                    selectProductCount++;
+                }
+                getCategoryRoom2(tableCount, lastQuotation.project.rooms[i].categoryRoom.roomCategoryId)
+                getTotalPriceOfAllRoom();
+
+                var addNewRecord = $('<button name="addNewRecord" class="btn btn-primary m-1">+</button>');
+                var deleteTable = $('<button name="deleteTable" class="btn btn-primary m-1">Xóa phòng</button>');
+                // Thêm hai phần tử mới vào trước phần tử có id là addNewTable
+                $('#addNewTable').before(addNewRecord, deleteTable);
+            }
+        }
+
+        function deleteInitialElement() {
+            $('[name="deleteTable"]').trigger('click')
+        }
+
+        //chon loai phong theo last quotation
+        function getCategoryRoom2(tableCount, roomCategoryId) {
+            $.ajax({
+                url: 'http://localhost:8080/api/categoryRoom',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillCategoryRoom2(resp.data, tableCount, roomCategoryId)
+                }
+            })
+        }
+        function fillCategoryRoom2(list, tableCount, roomCategoryId) {
+            let roomCategoryIdElement = $('#roomCategoryId' + tableCount)
+            for (let i = 0; i < list.length; i++) {
+                if(list[i].roomCategoryId===roomCategoryId) roomCategoryIdElement.append('<option selected value="' + list[i].roomCategoryId +'">' + list[i].categoryName +'</option>')
+                else roomCategoryIdElement.append('<option value="' + list[i].roomCategoryId +'">' + list[i].categoryName +'</option>')
+            }
+        }
+
+        function fetchProductByLastQuotation(roomCategoryId, selectProductCount, productId) {
+            let productElement = $('#product' + selectProductCount)
+
+            // Gọi API để lấy danh sách sản phẩm dựa trên roomCategoryId
+            $.ajax({
+                url: 'http://localhost:8080/api/product/roomCategory?roomCategoryId=' + roomCategoryId,
+                method: 'GET',
+                async: false,
+                contentType: 'application/json',
+                success: function (resp) {
+                    for (let i = 0; i < resp.data.length; i++) {
+                        if(resp.data[i].pro_id === productId)
+                            productElement.append('<option selected value="' + resp.data[i].pro_id +'">' + resp.data[i].pro_name +'</option>');
+                        else
+                            productElement.append('<option value="' + resp.data[i].pro_id +'">' + resp.data[i].pro_name +'</option>');
+                    }
+                }
+            });
+        }
+        function fetchProductDetailByLastQuotation(tr, roomProducts) {
+            tr.find('[data-name="txtProductDescription"]').text(roomProducts.productDetail.supplierProduct.product.proDescription)
+            var cusLength = roomProducts.productDetail.supplierProduct.product.measureUnit.cusLength
+            var cusWidth = roomProducts.productDetail.supplierProduct.product.measureUnit.cusWidth
+            var cusHeight = roomProducts.productDetail.supplierProduct.product.measureUnit.cusHeight
+            cusLength === false ? tr.find('[data-name="txtProductLength"]').text(roomProducts.productDetail.proLength)
+                                : tr.find('[data-name="txtProductLength"]').html('<input name="inputLength" type="number" min="0" max="10000" style="width: 60px; text-align: center" value="' + roomProducts.productDetail.proLength +'"/>')
+            cusWidth === false ? tr.find('[data-name="txtProductWidth"]').text(roomProducts.productDetail.proWidth)
+                                : tr.find('[data-name="txtProductWidth"]').html('<input name="inputWidth" type="number" min="0" max="10000" style="width: 60px; text-align: center" value="' + roomProducts.productDetail.proWidth +'"/>')
+            cusHeight === false ? tr.find('[data-name="txtProductHeight"]').text(roomProducts.productDetail.proHeight)
+                                : tr.find('[data-name="txtProductHeight"]').html('<input name="inputHeight" type="number" min="0" max="10000" style="width: 60px; text-align: center" value="' + roomProducts.productDetail.proHeight +'"/>')
+            tr.find('[data-name="txtProductMeasureUnit"]').text(roomProducts.productDetail.supplierProduct.product.measureUnit.measureUnitName)
+            tr.find('[name="inputProductQuantity"]').val(roomProducts.quantity)
+            tr.find('[data-name="txtProductUnitPrice"]').text((roomProducts.productDetail.supplierProduct.unitPrice*1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+            tr.find('[data-name="txtProductTotalPrice"]').text((roomProducts.totalPrice*1000000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '₫')
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+.multi-process-bar .steps{
+  --margin-steps-icon: 8.5%;
+  --size-steps-icon: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.multi-process-bar .steps .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: var(--size-steps-icon);
+  height: var(--size-steps-icon);
+  margin: 0 var(--margin-steps-icon);
+  border-radius: 50%;
+  border: 3px solid #dfe5ef;
+  font-size: 14px;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.multi-process-bar .progress-line{
+  position: absolute;
+  top: 11.5%;
+  height: 4px;
+  width: 85%;
+  background-color: #dfe5ef;
+  margin: 0 50px;
+  left: 45px;
+}
+
+.multi-process-bar .progress-line .indicator{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #176B87;
+  
+}
+
+.multi-process-bar .steps .circle:first-child{
+  margin: 0 var(--margin-steps-icon) 0 0;
+}
+
+.multi-process-bar .steps .circle:last-child{
+  margin: 0 0 0 var(--margin-steps-icon);
+}
+
+.multi-process-bar .steps-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

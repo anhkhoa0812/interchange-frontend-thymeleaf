@@ -1,0 +1,30 @@
+.form-check input{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.checkbox-control {
+    text-align: start;
+}
+.form-check-label{
+    width: 200px;
+}
+.checkbox-control:not(:first-child) {
+    margin-bottom: 10px;
+}
+.input-field {
+    align-items: normal;
+}
+
+.form-check {
+    margin: 10px 0;
+
+}
+.form-check:first-child {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.form-check:last-child {
+    margin-top: 10px;
+}
