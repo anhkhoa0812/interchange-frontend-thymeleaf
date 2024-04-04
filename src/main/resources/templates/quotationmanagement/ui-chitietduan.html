@@ -31,7 +31,7 @@
         <!-- Sidebar scroll-->
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between">
-                <a class="text-nowrap logo-img">
+                <a th:href="@{/staff-home}" class="text-nowrap logo-img">
                     <img th:src="@{/md/staff-images/logos/dark-logo.svg}" width="180" alt="" />
                 </a>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -41,6 +41,14 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                 <ul id="sidebarnav">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/staff-home}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Quản lý người dùng</span>
@@ -79,7 +87,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" th:href="@{/material-manage}" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{./material-manage}" aria-expanded="false">
                             <span class="hide-menu no-icon">Quản lý chất liệu</span>
                         </a>
                     </li>
@@ -215,7 +223,7 @@
                                 <div id="roomsOfProject" class="form-group" style="padding: 20px; border: 4px solid #c6c7c8; margin-bottom: 10px">
                                 </div>
 
-                                <button onclick="updateProject()" type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Cập nhật</button>
+                                <button onclick="updateProject()" type="button" class="btn btn-primary" >Cập nhật</button>
                             </form>
                         </div>
                     </div>
@@ -418,7 +426,7 @@
         let rooms = finalQuotation.project.rooms;
         let str = "";
         for (let i = 0; i < rooms.length; i++) {
-            str += '<div class="form-group roomName" style="padding-bottom: 10px">\n' +
+            str = '<div class="form-group roomName" style="padding-bottom: 10px">\n' +
                 '                                        <label for="roomNameInput' + (i+1) + '">Tên phòng</label>\n' +
                 '                                        <input type="text" class="form-control" id="roomNameInput' + (i+1) + '" aria-describedby="emailHelp" placeholder="Tên phòng" value="' + rooms[i].roomName + '">\n' +
                 '                                    </div>\n' +
@@ -442,7 +450,6 @@
     }
 
     function updateProject() {
-        console.log($('#projectStatus').val())
         if(parseInt($('#projectStatus').val()) === 6) {
             if (checkInput() === false) return;
         }
@@ -469,6 +476,7 @@
             data: JSON.stringify(quotationDTO),
             success: function (resp) {
                 console.log(resp);
+                $('#exampleModal').modal('show');
                 if(parseInt($('#projectStatus').val()) === 6) {updateImageRooms()}
             }, error:function (err) {
                 console.log(err)
@@ -553,7 +561,7 @@
 
     function fillImageRoom(previewImage) {
         let src = previewImage.find('img').attr('src');
-        let imageInputDivClass = previewImage.prev()
+        let imageInputDivClass = previewImage.prev();
         if(src !== '') {
             fetch(src)
                 .then(response => response.blob()) // Get the response as Blob

@@ -87,7 +87,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" th:href="@{/material-manage}" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{./material-manage}" aria-expanded="false">
                             <span class="hide-menu no-icon">Quản lý chất liệu</span>
                         </a>
                     </li>
@@ -910,6 +910,7 @@
 
     function fillQuotationByCurrentQuotation(lastQuotation) {
         deleteInitialElement()
+        $('#projectCategoryId').val(lastQuotation.project.categoryProject.projCategoryId);
         $('#supplierId').val(lastQuotation.project.rooms[0].roomProducts[0].productDetail.supplierProduct.supplier.supId);
         var str = ''
         for (let i = 0; i < lastQuotation.project.rooms.length; i++) {

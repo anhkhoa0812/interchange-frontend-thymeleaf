@@ -41,6 +41,14 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/staff-home}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Quản lý người dùng</span>
@@ -79,7 +87,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" th:href="@{/material-manage}" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{./material-manage}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý chất liệu</span>
                             </a>
                         </li>
@@ -854,6 +862,9 @@
                     if(await isFirstQuotation(mainProjectId) === false) {
                         getLastQuotation(resp.data);
                     }
+                    else {
+                        if (isFirstQuotationHasInformation()) {getQuotationByItsInformation()}
+                    }
                 }
             });
         }
@@ -904,9 +915,36 @@
             }
         }
 
-        function getLastQuotation(preQuotation) {
+        function isFirstQuotationHasInformation() {
+            let flag = false;
             $.ajax({
-                url: 'http://localhost:8080/api/main-project/pre-quotation?mainProjectId=' + mainProjectId +'&preQuotationId=' + preQuotation.pre_quotation_id,
+                url: 'http://localhost:8080/api/quotation/findEagerById?quotationId=' + quotationId,
+                method: 'GET',
+                contentType: 'application/json',
+                async: false,
+                success: function (resp) {
+                    if(resp.data.project !== null) {
+                        flag = true;
+                    }
+                }
+            });
+            return flag;
+        }
+
+        function getQuotationByItsInformation() {
+            $.ajax({
+                url: 'http://localhost:8080/api/quotation/findEagerById?quotationId=' + quotationId,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (resp) {
+                    fillQuotationByLastQuotation(resp.data)
+                }
+            });
+        }
+
+        function getLastQuotation(curQuotation) {
+            $.ajax({
+                url: 'http://localhost:8080/api/main-project/pre-quotation?mainProjectId=' + mainProjectId +'&preQuotationId=' + curQuotation.pre_quotation_id,
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (resp) {

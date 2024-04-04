@@ -21,7 +21,7 @@
     <!-- Sidebar scroll-->
     <div>
       <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="./admin-ui-admin-workspace.html" class="text-nowrap logo-img">
+        <a th:href="@{/admin-home}" class="text-nowrap logo-img">
           <img th:src="@{./md/admin-images/logos/dark-logo.svg}" width="180" alt="" />
         </a>
         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -119,7 +119,7 @@
                     <i class="ti ti-mail fs-6"></i>
                     <p class="mb-0 fs-3">Tài khoản</p>
                   </a>
-                  <a href="./ui-dangnhap.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
+                  <a th:href="@{/}" class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
                 </div>
               </div>
             </li>
