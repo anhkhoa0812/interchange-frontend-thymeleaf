@@ -120,6 +120,10 @@ public class BaseController {
         return "quotationmanagement/ui-thongtinduan";
     }
 
+    @GetMapping("/project-details")
+    public String projectDetails() {
+        return "quotationmanagement/ui-chitietduan";
+    }
     @GetMapping("/quotation-information")
     public String quotationInformation() {
         return "quotationmanagement/ui-thongtinbaogia";

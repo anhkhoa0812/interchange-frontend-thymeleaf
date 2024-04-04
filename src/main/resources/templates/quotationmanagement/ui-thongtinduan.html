@@ -46,7 +46,7 @@
                             <span class="hide-menu">Quản lý người dùng</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-quanlynguoidung.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/customer-management}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý người dùng</span>
                             </a>
                         </li>
@@ -69,17 +69,17 @@
                             <span class="hide-menu">Quản lý sản phẩm</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-quanlysanpham.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/product-management}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý sản phẩm</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-quanlyphanloai.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/category-product-management}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý phân loại</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-quanlychatlieusanpham.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/material-manage}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý chất liệu</span>
                             </a>
                         </li>
@@ -183,6 +183,9 @@
                                         <div>Trạng thái:</div>
                                         <div id="statusMainProject" style="padding-left: 20px;"></div>
                                     </div>
+                                    <div>
+                                        <button id="viewDetail" hidden="hidden" type="button" style="background-color: #64CCC5; width: 219px" class="btn btn-success" data-mdb-ripple-init>Thông tin chi tiết</button>
+                                    </div>
                                 <div class="content-non-inline">
                                     <div style="padding-top: 20px;" class="content-non-inline">Danh sách báo giá:</div>
                                 </div>
@@ -245,6 +248,9 @@
             $('#customerName').text($('#customerName').text() + mainProject.customer.firstName + ' ' + mainProject.customer.lastName);
             $('#customerPhone').text($('#customerPhone').text() + mainProject.customer.phoneNumber);
             $('#statusMainProject').text(getStatusName(mainProject.status))
+            if(mainProject.status>=5 || mainProject.status===0) {
+                $('#viewDetail').removeAttr('hidden');
+            }
         }
 
         function getQuotationList() {
@@ -287,6 +293,8 @@
         }
         function getStatusName(status) {
             switch (status) {
+                case 0:
+                    return "Đã hủy";
                 case 1:
                     return "Đang chờ nhân viên";
                 case 2:
@@ -296,14 +304,8 @@
                 case 4:
                     return "Chấp thuận báo giá";
                 case 5:
-                    return "Cập nhật thiết kế";
-                case 6:
-                    return "Kiểm duyệt thiết kế";
-                case 7:
-                    return "Chấp thuận thiết kế";
-                case 8:
                     return "Đang thi công";
-                case 9:
+                case 6:
                     return "Đã hoàn thành";
                 default:
                     return "";
@@ -316,6 +318,10 @@
             }
             else window.location.href = '/quotation-information?mainProjectId=' + mainProjectId + '&quotationId=' + quotationId;
         }
+
+        $('#viewDetail').click(function() {
+            window.location.href = '/project-details?mainProjectId=' + mainProjectId;
+        });
 
     </script>
 

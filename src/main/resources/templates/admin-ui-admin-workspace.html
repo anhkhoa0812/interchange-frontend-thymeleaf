@@ -32,42 +32,42 @@
       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
         <ul id="sidebarnav">
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./admin-ui-admin-workspace.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
+            <a class="sidebar-link" th:href="@{/admin-home}" aria-expanded="false">
+                          <span>
+                              <i class="ti ti-layout-dashboard"></i>
+                          </span>
               <span class="hide-menu">Dashboard</span>
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./admin-ui-quanlynhanvien.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
+            <a class="sidebar-link" th:href="@{/approve-quotation}" aria-expanded="false">
+                          <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                          </span>
+              <span class="hide-menu">Phê duyệt báo giá</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" th:href="@{/approve-design}" aria-expanded="false">
+                          <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                          </span>
+              <span class="hide-menu">Phê duyệt thiết kế</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" th:href="@{/staff-management}" aria-expanded="false">
+                          <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                          </span>
               <span class="hide-menu">Quản lý nhân viên</span>
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./admin-ui-quanlythietke.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-              <span class="hide-menu">Quản lý thiết kế</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="./admin-ui-quanlybaogia.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-              <span class="hide-menu">Quản lý báo giá</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="./admin-ui-quanlynhacungcap.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
+            <a class="sidebar-link" th:href="@{/supplier-management}" aria-expanded="false">
+                          <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                          </span>
               <span class="hide-menu">Quản lý nhà cung cấp</span>
             </a>
           </li>
@@ -139,7 +139,7 @@
                   <h5 class="card-title mb-9 fw-semibold warning status">Đang chờ phê duyệt</h5>
                   <div class="row align-items-center">
                     <div class="col-8 quotation-process">
-                      <h4 class="fw-semibold mb-3">120 báo giá</h4>
+                      <h4 class="fw-semibold mb-3" id="dang-cho-phe-duyet">120 báo giá</h4>
                     </div>
                   </div>
                 </div>
@@ -155,7 +155,7 @@
                   <h5 class="card-title mb-9 fw-semibold in-process status">Đang xử lý yêu cầu</h5>
                   <div class="row align-items-center">
                     <div class="col-8 quotation-process">
-                      <h4 class="fw-semibold mb-3">120 báo giá</h4>
+                      <h4 class="fw-semibold mb-3" id="dang-xu-ly-yeu-cau">120 báo giá</h4>
                     </div>
                   </div>
                 </div>
@@ -171,7 +171,7 @@
                   <h5 class="card-title mb-9 fw-semibold done status">Đã hoàn thành</h5>
                   <div class="row align-items-center">
                     <div class="col-8 quotation-process">
-                      <h4 class="fw-semibold mb-3">120 báo giá</h4>
+                      <h4 class="fw-semibold mb-3" id="da-hoan-thanh">120 báo giá</h4>
                     </div>
                   </div>
                 </div>
@@ -187,7 +187,7 @@
                   <h5 class="card-title mb-9 fw-semibold danger status">Đã hủy</h5>
                   <div class="row align-items-center">
                     <div class="col-8 quotation-process">
-                      <h4 class="fw-semibold mb-3">120 báo giá</h4>
+                      <h4 class="fw-semibold mb-3" id="da-huy">120 báo giá</h4>
                     </div>
                   </div>
                 </div>
@@ -203,11 +203,12 @@
                   <h5 class="card-title fw-semibold">Tổng doanh thu hằng tháng</h5>
                 </div>
                 <div style="display: flex;">
-                  <button style="padding: 8px 16px; line-height: 1.5; background-size: 16px 12px;"
-                          class="btn btn-primary m-1">Export</button>
-                  <select class="form-select">
-                    <option value="1">2023</option>
-                    <option value="2">2024</option>
+                  <button style="padding: 8px 16px; line-height: 1.5; background-size: 16px 12px; width: 7rem;"
+                          class="btn btn-primary m-1 export-button" onclick="downloadExcel()">Xuất Excel</button>
+                  <select style="width: 8rem;" class="form-select" id="year-select">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
                   </select>
                 </div>
               </div>
@@ -227,19 +228,19 @@
                       <div class="d-flex align-items-center padding-space">
                         <div class="me-4">
                           <span class="round-8 done rounded-circle me-2 d-inline-block"></span>
-                          <span class="fs-3">Đã xử lý</span>
+                          <span class="fs-3">Đang chờ phê duyệt</span>
                         </div>
                       </div>
                       <div class="d-flex align-items-center padding-space">
                         <div class="me-4">
                           <span class="round-8 in-process rounded-circle me-2 d-inline-block"></span>
-                          <span class="fs-3">Đang xử lý</span>
+                          <span class="fs-3">Đang xử lý yêu cầu</span>
                         </div>
                       </div>
                       <div class="d-flex align-items-center padding-space">
                         <div class="me-4">
                           <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-                          <span class="fs-3">Chưa xử lý</span>
+                          <span class="fs-3">Đã hoàn thành</span>
                         </div>
                       </div>
                       <div class="d-flex align-items-center padding-space">
@@ -296,132 +297,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="favourite-design">
-          <h5 class="card-title mb-9 fw-semibold fontsize-title"> Sản phẩm có doanh thu cao </h5>
-          <!-- <div class="interior-design">
-              <div class="col-sm-6 col-xl-4">
-                <div class="card overflow-hidden rounded-2">
-                  <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="./public/image/44-450x320.jpg"
-                        class="card-img-top rounded-0" alt="..."></a>
-                  </div>
-                  <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4 padding-in-box">Tủ bếp</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <ul class="list-unstyled d-flex align-items-center mb-0">
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-4">
-                <div class="card overflow-hidden rounded-2">
-                  <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="./public/image/18-450x320.jpg" class="card-img-top rounded-0"
-                        alt="..."></a>
-                  </div>
-                  <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4 padding-in-box">Gạch ốp đá tự nhiên</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <ul class="list-unstyled d-flex align-items-center mb-0">
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-4">
-                <div class="card overflow-hidden rounded-2">
-                  <div class="position-relative">
-                    <a href="javascript:void(0)"><img src="./public/image/4-1-450x320.jpg" class="card-img-top rounded-0"
-                        alt="..."></a>
-                  </div>
-                  <div class="card-body pt-3 p-4">
-                    <h6 class="fw-semibold fs-4 padding-in-box">Sofa hiện đại</h6>
-                    <div class="d-flex align-items-center justify-content-between">
-
-                      <ul class="list-unstyled d-flex align-items-center mb-0">
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                        <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          <div class="card no-shadow">
-            <table class="content-table show-product" id="manage-product-table-1">
-              <thead>
-              <tr>
-                <th class="display-column product-id" rowspan="2">ID</th>
-                <th class="display-column product-name" rowspan="2">Tên sản phẩm</th>
-                <th class="display-column product-description" rowspan="2">Mô tả</th>
-                <th class="supplier" rowspan="2">Nhà cung cấp</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="display-input-none-border">
-                <td class="product-id">5 </td>
-                <td class="product-name">Sofa Góc SG-202</td>
-                <td class="product-description">Sofa góc hiện đại với khung kim loại và lớp đệm êm ái, tạo ra một
-                  không gian ngồi thoải mái cho
-                  gia đình hoặc khách của bạn. Bề mặt vải mềm mại và dễ vệ sinh.</td>
-                <td class="supplier">An Cường</td>
-              </tr>
-              <tr class="display-input-none-border">
-                <td class="product-id">6</td>
-                <td class="product-name">Bàn Trà BT-404</td>
-                <td class="product-description"> Bàn trà bằng gỗ sồi tự nhiên, có thiết kế đơn giản và thanh lịch.
-                  Bàn trà này là một điểm nhấn
-                  tuyệt vời cho phòng khách của bạn và cung cấp không gian lý tưởng để đặt đồ uống hoặc trang trí.
-                </td>
-                <td class="supplier">Thanh Thủy</td>
-              </tr>
-              <tr class="display-input-none-border">
-                <td class="product-id">6</td>
-                <td class="product-name">Bàn Trà BT-404</td>
-                <td class="product-description"> Bàn trà bằng gỗ sồi tự nhiên, có thiết kế đơn giản và thanh lịch.
-                  Bàn trà này là một điểm nhấn
-                  tuyệt vời cho phòng khách của bạn và cung cấp không gian lý tưởng để đặt đồ uống hoặc trang trí.
-                </td>
-                <td class="supplier">Thanh Thủy</td>
-              </tr>
-              <tr class="display-input-none-border">
-                <td class="product-id">6</td>
-                <td class="product-name">Bàn Trà BT-404</td>
-                <td class="product-description"> Bàn trà bằng gỗ sồi tự nhiên, có thiết kế đơn giản và thanh lịch.
-                  Bàn trà này là một điểm nhấn
-                  tuyệt vời cho phòng khách của bạn và cung cấp không gian lý tưởng để đặt đồ uống hoặc trang trí.
-                </td>
-                <td class="supplier">Thanh Thủy</td>
-              </tr>
-              <tr class="display-input-none-border">
-                <td class="product-id">6</td>
-                <td class="product-name">Bàn Trà BT-404</td>
-                <td class="product-description"> Bàn trà bằng gỗ sồi tự nhiên, có thiết kế đơn giản và thanh lịch.
-                  Bàn trà này là một điểm nhấn
-                  tuyệt vời cho phòng khách của bạn và cung cấp không gian lý tưởng để đặt đồ uống hoặc trang trí.
-                </td>
-                <td class="supplier">Thanh Thủy</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -431,7 +306,66 @@
 <script th:src="@{./md/admin-js/app.min.js}"></script>
 <script th:src="@{./md/admin-libs/apexcharts/dist/apexcharts.min.js}"></script>
 <script th:src="@{./md/admin-libs/simplebar/dist/simplebar.js}"></script>
-<script th:src="@{./md/admin-js/dashboard.js}"></script>
+<script th:src="@{./md/staff-js/dashboard.js}"></script>
+<script>
+  function downloadExcel() {
+    var selectedElement = document.getElementById("year-select");
+    console.log(selectedElement);
+    var selectedValue = selectedElement.options[selectedElement.selectedIndex].value;
+    $.ajax({
+      url: "http://localhost:8080/api/project/export/" + selectedValue,
+      type: "GET",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+      },
+      xhrFields: {
+        responseType: 'blob'
+      },
+      success: function (response, status, xhr) {
+
+        var blob = new Blob([response], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "tongdoanhthunam" + selectedValue + ".xlsx";
+
+        document.body.appendChild(link);
+        link.click();
+
+        document.body.removeChild(link);
+
+      },
+      error: function (xhr, status, error) {
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+      }
+    })
+  }
+  function CountQuotaion() {
+    var countDangChoPheDuyet = document.getElementById("dang-cho-phe-duyet");
+    var countDangXuLyYeuCau = document.getElementById("dang-xu-ly-yeu-cau");
+    var countDaHoanThanh = document.getElementById("da-hoan-thanh");
+    var countDaHuy = document.getElementById("da-huy");
+
+    $.ajax({
+      url: "http://localhost:8080/api/quotation/countQuotationByStatus",
+      type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+        },
+        success: function (response) {
+            countDangChoPheDuyet.innerHTML = response[0] + "  Báo giá";
+            countDangXuLyYeuCau.innerHTML = response[1] + "  Báo giá";
+            countDaHoanThanh.innerHTML = response[2] + "  Báo giá";
+            countDaHuy.innerHTML = response[3] + "  Báo giá";
+        },
+    })
+  }
+  $(document).ready(function () {
+    CountQuotaion();
+  });
+</script>
 </body>
 
 </html>

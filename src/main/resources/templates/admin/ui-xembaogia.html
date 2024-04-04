@@ -42,6 +42,14 @@
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
+                            <a class="sidebar-link" th:href="@{/admin-home}" aria-expanded="false">
+                          <span>
+                              <i class="ti ti-layout-dashboard"></i>
+                          </span>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link" th:href="@{/approve-quotation}" aria-expanded="false">
                           <span>
                             <i class="ti ti-layout-dashboard"></i>
@@ -58,7 +66,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./admin-ui-quanlynhanvien.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/staff-management}" aria-expanded="false">
                           <span>
                             <i class="ti ti-layout-dashboard"></i>
                           </span>
@@ -66,19 +74,11 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./admin-ui-quanlynhacungcap.html" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/supplier-management}" aria-expanded="false">
                           <span>
                             <i class="ti ti-layout-dashboard"></i>
                           </span>
                                 <span class="hide-menu">Quản lý nhà cung cấp</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="./admin-ui-admin-workspace.html" aria-expanded="false">
-                          <span>
-                              <i class="ti ti-layout-dashboard"></i>
-                          </span>
-                                <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                     </ul>

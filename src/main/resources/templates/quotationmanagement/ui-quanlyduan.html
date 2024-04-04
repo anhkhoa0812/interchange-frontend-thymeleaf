@@ -31,7 +31,7 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a th:href="@{/staff-home}" class="text-nowrap logo-img">
+                    <a class="text-nowrap logo-img">
                         <img th:src="@{/md/staff-images/logos/dark-logo.svg}" width="180" alt="" />
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -79,7 +79,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" th:href="@{./material-manage}" aria-expanded="false">
+                            <a class="sidebar-link" th:href="@{/material-manage}" aria-expanded="false">
                                 <span class="hide-menu no-icon">Quản lý chất liệu</span>
                             </a>
                         </li>
@@ -168,15 +168,13 @@
                                 <form style="align-items: center;" class="display-flex justify-content-right" action="#">
                                     <div>Bộ lọc</div>
                                     <select style="" class="btn" name="" id="status">
-                                        <option style="text-transform: lowercase; text-align: left" value="0">Hiển thị tất cả</option>
+                                        <option style="text-transform: lowercase; text-align: left" value="-1">Hiển thị tất cả</option>
+                                        <option style="text-transform: lowercase; text-align: left" value="0">Đã hủy</option>
                                         <option style="text-transform: lowercase; text-align: left" value="2">Cập nhật nội thất</option>
                                         <option style="text-transform: lowercase; text-align: left" value="3">Kiểm duyệt báo giá</option>
                                         <option style="text-transform: lowercase; text-align: left" value="4">Chấp thuận báo giá</option>
-                                        <option style="text-transform: lowercase; text-align: left" value="5">Cập nhật thiết kế</option>
-                                        <option style="text-transform: lowercase; text-align: left" value="6">Kiểm duyệt thiết kế</option>
-                                        <option style="text-transform: lowercase; text-align: left" value="7">Chấp thuận thiết kế</option>
-                                        <option style="text-transform: lowercase; text-align: left" value="8">Đang thi công</option>
-                                        <option style="text-transform: lowercase; text-align: left" value="9">Đã hoàn thành</option>
+                                        <option style="text-transform: lowercase; text-align: left" value="5">Đang thi công</option>
+                                        <option style="text-transform: lowercase; text-align: left" value="6">Đã hoàn thành</option>
                                     </select>
                                 </form>
                                 <h5 id="title" style="font-size: 18px">Tổng số dự án: </h5>
@@ -273,6 +271,8 @@
         }
         function getStatusName(status) {
             switch (status) {
+                case 0:
+                    return "Đã hủy";
                 case 1:
                     return "Đang chờ nhân viên";
                 case 2:
@@ -282,14 +282,8 @@
                 case 4:
                     return "Chấp thuận báo giá";
                 case 5:
-                    return "Cập nhật thiết kế";
-                case 6:
-                    return "Kiểm duyệt thiết kế";
-                case 7:
-                    return "Chấp thuận thiết kế";
-                case 8:
                     return "Đang thi công";
-                case 9:
+                case 6:
                     return "Đã hoàn thành";
                 default:
                     return "";

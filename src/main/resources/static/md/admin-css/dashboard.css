@@ -94,3 +94,13 @@
 .quotation-process svg{
     width: 0.5rem;
 }
+svg#SvgjsSvg1006{
+    width: 720px !important;
+}
+
+.apexcharts-xaxis-tick {
+    opacity: 0
+}
+.export-button {
+    width: fit-content;
+}
